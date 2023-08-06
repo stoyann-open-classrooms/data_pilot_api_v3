@@ -1,0 +1,20 @@
+{
+  "name": "data_pilot_api_v3",
+  "version": "1.0.0",
+  "description": "Backend de l'application DATA PILOT by Square",
+  "main": "server.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "node server.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/stoyann-open-classrooms/data_pilot_api_v3.git"
+  },
+  "author": "SQUARE",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/stoyann-open-classrooms/data_pilot_api_v3/issues"
+  },
+  "homepage": "https://github.com/stoyann-open-classrooms/data_pilot_api_v3#readme"
+}
