@@ -9,6 +9,14 @@ const TableauSchema = new mongoose.Schema({
     required: true,
   },
 
+  dateStart:{
+    type: String, 
+    default: "Date début"
+  },
+  dateEnd:{
+     type: String,
+      default: "Date fin"
+  },
 
   type: {
     type: String,

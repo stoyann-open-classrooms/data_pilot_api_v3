@@ -2,7 +2,7 @@ const express = require('express');
 
 const Line = require('../models/Line');
 
-const { getLines, getLine, createLine, updateLine, deleteLine } = require('../controllers/lines')
+const { getLines, getLine, createLine, updateLine, deleteLine, getLinesForTable } = require('../controllers/lines')
 
 
 const advancedResults = require('../middlewares/advancedResults');
@@ -21,5 +21,7 @@ router.route('/:id')
   .get(getLine)
   .put(updateLine)
   .delete(deleteLine);
+
+ 
 
 module.exports = router;
