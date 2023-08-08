@@ -8,7 +8,7 @@ const PermissionSchema = new mongoose.Schema({
   },
   tableau: {
     type: mongoose.Schema.Types.ObjectId,
-    ref: 'Table',
+    ref: 'Tableau',
     required: true,
   },
   read: {
