@@ -18,7 +18,7 @@ const Authorization = require('../models/Permission');
 
 router
   .route('/')
-  .get(advancedResults(Authorization), getAuthorizations)
+  .get(advancedResults(Authorization ), getAuthorizations)
   .post(createAuthorization);
 
 router

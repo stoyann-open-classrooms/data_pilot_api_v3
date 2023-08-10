@@ -11,6 +11,7 @@ const User = require('./models/User')
 const Customer = require('./models/Customer')
 const Table = require('./models/Table')
 const Line = require('./models/Line')
+const Rapport = require('./models/Rapport')
 
 
 // Connect to DB
@@ -34,6 +35,9 @@ const tables = JSON.parse(
 const lines = JSON.parse(
   fs.readFileSync(`${__dirname}/_data/lines.json`, 'utf-8'),
 )
+const rapports = JSON.parse(
+  fs.readFileSync(`${__dirname}/_data/rapports.json`, 'utf-8'),
+)
 
 
 
@@ -46,6 +50,7 @@ const importData = async () => {
     await Customer.create(customers)
     await Table.create(tables)
     await Line.create(lines)
+    await Rapport.create(rapports)
     console.log('Data Imported...'.green.inverse)
     process.exit()
   } catch (err) {
@@ -60,6 +65,7 @@ const deleteData = async () => {
     await Customer.deleteMany()
     await Table.deleteMany()
     await Line.deleteMany()
+    await Rapport.deleteMany()
     console.log('Data Destroyed...'.red.inverse)
     process.exit()
   } catch (err) {

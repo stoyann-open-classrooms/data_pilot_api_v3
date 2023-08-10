@@ -1,0 +1,23 @@
+[
+    {
+		"_id": "8d7a514b5d2c12c7449be011",
+		"customer": "5d7a514b5d2c12c7449be310",
+		"title": "Suivie des activités SLN",
+		"rapport": "https://app.powerbi.com/view?r=eyJrIjoiNmEyNGY3NmQtNDY0Ny00MTI0LWIyNWMtNjM0NmQ1NmFmMzVjIiwidCI6ImI0Mjk1ZmNmLTk3MmItNDFjMC05OGYzLTNkNzU4NmIyZTdkYiIsImMiOjEwfQ%3D%3D",
+		"frame": "<iframe title=\"bqs_sln_dashboard\" width=\"1140\" height=\"541.25\" src=\"https://app.powerbi.com/reportEmbed?reportId=9c5c76ca-659b-4ade-aeaa-d503b2f6c690&autoAuth=true&ctid=b4295fcf-972b-41c0-98f3-3d7586b2e7db\" frameborder=\"0\" allowFullScreen=\"true\"></iframe>"
+    },
+    {
+		"_id": "8d7a514b5d2c12c7449be013",
+		"customer": "5d7a514b5d2c12c7449be310",
+		"title": "Suivie des activités Hôtel de ville Dumbéa",
+		"rapport": "https://app.powerbi.com/view?r=eyJrIjoiMDRiMzQxOGQtYjFmMi00Yzk5LWE4MGYtM2RjMjMwZGRiYjkwIiwidCI6ImI0Mjk1ZmNmLTk3MmItNDFjMC05OGYzLTNkNzU4NmIyZTdkYiIsImMiOjEwfQ%3D%3D",
+		"frame": "<iframe title=\"bqs_HDVD_dashboard\" width=\"1140\" height=\"541.25\" src=\"https://app.powerbi.com/reportEmbed?reportId=099783b6-22a0-41fa-9b48-cadc2e8609ff&autoAuth=true&ctid=b4295fcf-972b-41c0-98f3-3d7586b2e7db\" frameborder=\"0\" allowFullScreen=\"true\"></iframe>"
+    },
+    {
+		"_id": "8d7a514b5d2c12c7449be012",
+		"customer": "5d7a514b5d2c12c7449be310",
+		"title": "Suivie des activités CHS",
+		"rapport": "https://app.powerbi.com/view?r=eyJrIjoiYmVkNDIzYTItOTI4OC00OGY1LWJkN2ItMmRhYTk5MTA1MTUwIiwidCI6ImI0Mjk1ZmNmLTk3MmItNDFjMC05OGYzLTNkNzU4NmIyZTdkYiIsImMiOjEwfQ%3D%3D",
+		"frame": "<iframe title=\"bqs_chs_dashboard\" width=\"600\" height=\"373.5\" src=\"https://app.powerbi.com/view?r=eyJrIjoiYmVkNDIzYTItOTI4OC00OGY1LWJkN2ItMmRhYTk5MTA1MTUwIiwidCI6ImI0Mjk1ZmNmLTk3MmItNDFjMC05OGYzLTNkNzU4NmIyZTdkYiIsImMiOjEwfQ%3D%3D\" frameborder=\"0\" allowFullScreen=\"true\"></iframe>"
+    }
+]

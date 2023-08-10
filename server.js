@@ -30,6 +30,8 @@ const customers = require('./routes/customers.js')
 const tables = require('./routes/tables.js')
 const permissions = require('./routes/permissions.js')
 const lines = require('./routes/lines.js')
+const rapports = require('./routes/rapports.js')
+const permissionRapports = require('./routes/permissionRapports.js')
 
 
 // initialize express  application
@@ -80,9 +82,11 @@ app.use(helmet.crossOriginResourcePolicy({ policy: 'cross-origin' }))
 app.use('/data_pilot/api/v3/auth', auth)
 app.use('/data_pilot/api/v3/users', users)
 app.use('/data_pilot/api/v3/customers', customers)
+app.use('/data_pilot/api/v3/rapports', rapports)
 app.use('/data_pilot/api/v3/tables', tables)
 app.use('/data_pilot/api/v3/authorizations', permissions)
 app.use('/data_pilot/api/v3/lines', lines)
+app.use('/data_pilot/api/v3/permissions', permissionRapports)
 
 
 
