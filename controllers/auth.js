@@ -80,6 +80,11 @@ exports.getMe = asyncHandler(async (req, res, next) => {
 // @route     PUT /api/v3/auth/updatedetails
 // @access    Private
 exports.updateDetails = asyncHandler(async (req, res, next) => {
+  // Vérifiez si req.user est défini
+  if (!req.user || !req.user.id) {
+    return next(new ErrorResponse("L'utilisateur n'est pas authentifié.", 401));
+  }
+
   const fieldsToUpdate = {
     username: req.body.username,
     email: req.body.email,
@@ -90,11 +95,16 @@ exports.updateDetails = asyncHandler(async (req, res, next) => {
     runValidators: true,
   })
 
+  if (!user) {
+    return next(new ErrorResponse("L'utilisateur n'a pas été trouvé.", 404));
+  }
+
   res.status(200).json({
     success: true,
     data: user,
-  })
-})
+  });
+});
+
 
 // @desc      Update password
 // @route     PUT /api/v3/auth/updatepassword
@@ -117,76 +127,91 @@ exports.updatePassword = asyncHandler(async (req, res, next) => {
 // @route     POST /api/v3/auth/forgotpassword
 // @access    Public
 exports.forgotPassword = asyncHandler(async (req, res, next) => {
-  const user = await User.findOne({ email: req.body.email })
+  const user = await User.findOne({ email: req.body.email });
 
   if (!user) {
-    return next(new ErrorResponse('There is no user with that email', 404))
+    return next(new ErrorResponse('There is no user with that email', 404));
   }
 
   // Get reset token
-  const resetToken = user.getResetPasswordToken()
+  const resetToken = user.getResetPasswordToken();
 
-  await user.save({ validateBeforeSave: false })
+  await user.save({ validateBeforeSave: false });
 
   // Create reset url
-  const resetUrl = `${req.protocol}://${req.get(
-    'host',
-  )}data_pilot/api/v3/auth/resetpassword/${resetToken}`
+  // const resetUrl = `${req.protocol}://${req.get('host')}/data_pilot/api/v3/auth/resetpassword/${resetToken}`;
+  const resetUrl = `${process.env.FRONT_URL}reset-password/${resetToken}`;
 
   const message = `
-  Vous recevez cet e-mail car vous (ou quelqu'un d'autre) avez demandé la réinitialisation d'un mot de passe. Veuillez faire une demande  à : \n\n ${resetUrl}`
+    Vous recevez cet e-mail car vous (ou quelqu'un d'autre) avez demandé la réinitialisation d'un mot de passe. Veuillez faire une demande à : \n\n ${resetUrl}
+  `;
 
   try {
     await sendEmail({
       email: user.email,
-      subject: 'Réinitialisation de votre mot de passe',
+      subject: 'Réinitialisation de votre mot de passe DATA PILOT',
       message,
-    })
+    });
 
-    res.status(200).json({ success: true, data: 'Email sent' })
+    return res.status(200).json({ success: true, data: 'Email sent' });
   } catch (err) {
-    console.log(err)
-    user.resetPasswordToken = undefined
-    user.resetPasswordExpire = undefined
+    console.log(err);
+    user.resetPasswordToken = undefined;
+    user.resetPasswordExpire = undefined;
 
-    await user.save({ validateBeforeSave: false })
+    await user.save({ validateBeforeSave: false });
 
-    return next(new ErrorResponse('Email could not be sent', 500))
+    return next(new ErrorResponse('Email could not be sent', 500));
   }
+});
 
-  res.status(200).json({
-    success: true,
-    data: user,
-  })
-})
 
 // @desc      Reset password
 // @route     PUT /api/v3/auth/resetpassword/:resettoken
 // @access    Public
 exports.resetPassword = asyncHandler(async (req, res, next) => {
+  console.log('Reset password function triggered'); // Log initial
+  
+  // Log the token received from the request
+  console.log('Token received from request:', req.params.resettoken);
+
   // Get hashed token
   const resetPasswordToken = crypto
     .createHash('sha256')
     .update(req.params.resettoken)
-    .digest('hex')
+    .digest('hex');
+
+  // Log the hashed token
+  console.log('Hashed token:', resetPasswordToken);
 
   const user = await User.findOne({
     resetPasswordToken,
     resetPasswordExpire: { $gt: Date.now() },
-  })
+  });
+
+  // Log if the user is found or not
+  if (user) {
+    console.log('User found with the provided token.');
+  } else {
+    console.log('No user found with the provided token.');
+  }
 
   if (!user) {
-    return next(new ErrorResponse('Invalid token', 400))
+    return next(new ErrorResponse('Invalid token', 400));
   }
 
   // Set new password
-  user.password = req.body.password
-  user.resetPasswordToken = undefined
-  user.resetPasswordExpire = undefined
-  await user.save()
+  user.password = req.body.password;
+  user.resetPasswordToken = undefined;
+  user.resetPasswordExpire = undefined;
 
-  sendTokenResponse(user, 200, res)
-})
+  await user.save();
+
+  console.log('Password reset successful.'); // Log when password reset is successful
+
+  sendTokenResponse(user, 200, res);
+});
+
 
 // Get token from model, create cookie and send response
 const sendTokenResponse = (user, statusCode, res) => {

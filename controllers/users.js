@@ -34,7 +34,7 @@ exports.createUser = asyncHandler(async (req, res, next) => {
   try {
     await sendEmail({
       email: user.email,
-      subject: `Création de votre compte ${req.body.role} Krysto`,
+      subject: `Création de votre compte ${req.body.role} DATA PILOT`,
       message,
     })
     res.status(201).json({ success: true, data: user })
