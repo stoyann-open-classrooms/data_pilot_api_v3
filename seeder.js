@@ -46,8 +46,11 @@ const rapports = JSON.parse(
 // Import into DB
 const importData = async () => {
   try {
+    
     await User.create(users)
-
+    await Customer.create(customers)
+    await Line.create(lines)
+    await Rapport.create(rapports)
     console.log('Data Imported...'.green.inverse)
     process.exit()
   } catch (err) {

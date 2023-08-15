@@ -15,7 +15,7 @@ const router = express.Router({ mergeParams: true });
 const { protect, authorize } = require('../middlewares/auth');
 
 // Use the protect middleware if you want these routes to be protected
-router.use(protect);
+// router.use(protect);
 // Only allow superAdmin to access these routes
 // router.use(authorize('superAdmin'));
 
